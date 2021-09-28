@@ -1,0 +1,44 @@
+vol1 = niftiread('ICBMlores.nii.gz');
+vol2 = niftiread('brainT1clores.nii.gz');
+figure(1); imagesc(vol1(:,:,64) ); colormap gray
+figure(2); imagesc(vol2(:,:,64) ); colormap gray
+% Mean Sq Error
+MSQ = immse(vol1, vol2)
+
+% NCC
+%NCC =
+
+% MI
+nbins=32; % number of bins
+vol1 = reshape(vol1,[],1);
+vol2 = reshape(vol2,[],1);
+
+min1 = min(vol1);
+min2 = min(vol2);
+max1 = max(vol1);
+max2 = max(vol2);
+bin1 = (max1 - min1)/nbins;
+bin2 = (max2 - min2)/nbins;
+
+hist1 = zeros(nbins+1,1); % initialize histogram
+for iii = 1:length(vol1);
+    idx = floor((vol1(iii) - min1)./bin1) + 1; % bin location
+    hist1(idx) = hist1(idx) + 1; % increment histogram
+end
+
+hist2 = zeros(nbins+1,1); % initialize histogram
+for jjj = 1:length(vol2);
+   idy = floor((vol2(jjj) - min2)./bin2) + 1; % bin location
+   hist2(idy) = hist2(idy) + 1; % increment histogram
+end
+
+hist1 = hist1/length(vol1) %
+hist2 = hist2/length(vol2) 
+hist2(31) = 0.00000000000000000000000000000000000000000000000000000000001
+%size(hist2)
+entropy1 = -sum(hist1 .*log(hist1 ))
+entropy2 = -sum(hist2 .*log(hist2))
+bar(hist1)
+hold
+bar(hist2)
+%MI = 
