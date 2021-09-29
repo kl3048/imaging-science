@@ -1,0 +1,10 @@
+% NCC
+
+hat1 = mean(vol1);
+hat2 = mean(vol2);
+diff1 = vol1 - hat1; % a- a_hat over the entire image
+diff2 = vol2 - hat2;
+bottom1 = sqrt(sum(sum(sum((diff1).^2)))); %norm
+bottom2 = sqrt(sum(sum(sum((diff2).^2))));
+
+NCC = - ((sum(sum(sum(diff1.*diff2)))).^2)./((bottom1^2).*(bottom2^2))
