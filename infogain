@@ -12,10 +12,11 @@ nbins = 32;
 min1 = min(intensitysubset); max1 = max(intensitysubset);
 IntensityRange = (max1 - min1);
 BinSize = (max1 - min1)/nbins;
+
 histogram = zeros(nbins+1,1); % initialize histogram
    for iii = 1:length(intensitysubset);
-    idx = floor( (intensitysubset(iii) - min1)/BinSize) + 1; % bin location
-    histogram (idx) = histogram(idx) + 1; % increment histogram
+    idx = floor( (intensitysubset(iii) - min1)/BinSize) + 1 % bin location
+    histogram(idx) = histogram(idx) + 1; % increment histogram
    end
 histogram = histogram /length(intensitysubset); % normalize to 1
 %entropy = -sum(histogram .*log(histogram ))
@@ -26,11 +27,13 @@ nbins = 32;
 min2 = min(labelsubset); max2 = max(labelsubset);
 LabelRange = (max2 - min2);
 BinSize = (max2 - min2)/nbins;
-histogram = zeros(nbins+1,1); % initialize histogram
-   for iii = 1:length(intensitydata);
-    idy = floor( (labelsubset(iii) - min1)/BinSize) + 1; % bin location
-    histogram2 (idy) = histogram(idy) + 1; % increment histogram
+histogram2 = zeros(nbins+1,1); % initialize histogram
+   for iii = 1:length(labelsubset);
+    idy = floor( (labelsubset(iii) - min2)/BinSize) + 1; % bin location
+    histogram2 (idy) = histogram2(idy) + 1; % increment histogram
    end
 histogram2 = histogram2 /length(labelsubset); % normalize to 1
+EntropyAfter = -sum(histogram2 .*log(histogram2 ))
 %intensityMaxInformationGain = 
-%maxInformationGain = 
+
+maxInformationGain = EntropyAfter - EntropyBefore
