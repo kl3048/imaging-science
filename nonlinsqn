@@ -1,0 +1,28 @@
+% first iteration of Guass Newton Approach
+InitialGuess = [1;1;1];
+myShortAnswer1 = 'Define what metric you are using for your objective function.'
+
+% Compute initial residual
+InitialResidual = 
+
+
+% Compute Least Square Solution
+LeastSquareSolution = 
+% Compute Normal Eqn Solution
+NormalEqnSoln       = 
+% Compute QR Solution
+QRSoln              =    
+myShortAnswer2 = 'Compare QR factorization vs normal equations. What are potential advantages and disadvantages of both approaches ?'; 
+
+% hand coded Guass Newton solver
+convergence = 1.0;
+tolerance = 7.e-2;                                                                                    
+x = InitialGuess;
+while (convergence > tolerance)
+  % update solution
+  x = 
+end
+
+myShortAnswer3 = 'What algorithm did you use ? What properties led to your algorithm selection ? Quasi-Newton'; 
+
+myShortAnswer4 = "What is your convergence rate ? How does it compare to lsqnonlin?"
