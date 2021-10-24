@@ -37,16 +37,15 @@ J2 = -exp(x(2)*t.^2+x(3)*t)*x(1).*t.^2;
 J3 = -exp(x(2)*t.^2+x(3)*t)*x(1).*t;
 J = [J1 J2 J3];
 [Q R] = qr(J);
-s = -R\(Q'*r)  
+s = -R\(Q'*r); 
 x = x + s
-convergence = (1/2)*(transpose(r)).*r
-%convergence =0;
+convergence = (1/2)*(transpose(r)).*r;
 end
 
 
 myShortAnswer3 = 'What algorithm did you use ? What properties led to your algorithm selection ? Gauss Newton/Quasi Newton. The Gauss-Newton Method approximates the Hessian with first derivative information and saves implementation time per the notes. Approximating the hessian by dropping the second order term renders it a Quasi Newton'; 
 
-myShortAnswer4 = "What is your convergence rate ? How does it compare to lsqnonlin?"
+myShortAnswer4 = "What is your convergence rate ? How does it compare to lsqnonlin? Convergence rate is pretty fast. It's pretty close to lsqnonlin.";
 x0 = [1; 1;1];
 
 fun= @(x)x(1)*exp(x(2)*t.^2 + x(3)*t);
