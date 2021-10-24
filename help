@@ -46,19 +46,9 @@ end
 
 myShortAnswer3 = 'What algorithm did you use ? What properties led to your algorithm selection ? Gauss Newton/Quasi Newton. The Gauss-Newton Method approximates the Hessian with first derivative information and saves implementation time per the notes. Approximating the hessian by dropping the second order term renders it a Quasi Newton'; 
 
-myShortAnswer4 = "What is your convergence rate ? How does it compare to lsqnonlin?";
-function [residual,jacobian]= pharmacokinetics(x1)
-y = [3; 2.7; 1.3; .7; .1];
-t = [0; 1; 2; 3; 4];
-x1 = [1; 1; 1];
-residual = y - x1(1)*exp(x1(2)*t.^2 + x1(3)*t);
-J1 = -exp(x1(2)*t.^2 + x1(3)*t);
-J2 = -exp(x1(2)*t.^2+x1(3)*t)*x1(1).*t.^2;
-J3 = -exp(x1(2)*t.^2+x1(3)*t)*x1(1).*t;
-jacobian = [J1 J2 J3];
-disp (sprintf( '%f %f %f ' , x1(1) , x1(2) , x1(3), residual'*residual ) );
-%x2 = lsqnolin(@pharmacokinetic,[1;0],-inf,inf,optimset('jacobian','on'))
-%disp(x2)
-end
+myShortAnswer4 = "What is your convergence rate ? How does it compare to lsqnonlin?"
+x0 = [1; 1;1];
 
-
+fun= @(x)x(1)*exp(x(2)*t.^2 + x(3)*t);
+options = optimoptions('lsqnonlin','Display','iter');
+lsqnonlin(fun,x0,-inf,inf,options)
