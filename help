@@ -1,3 +1,30 @@
+% first iteration of Guass Newton Approach
+InitialGuess = [1;1;1];
+myShortAnswer1 = 'Define what metric you are using for your objective function. The 2-norm of the residual';
+
+% Compute initial residual
+y = [3; 2.7; 1.3; .7; .1];
+t = [0; 1; 2; 3; 4];
+x = [1; 1; 1];
+InitialResidual = y - x(1)*exp(x(2)*t.^2 + x(3)*t);
+r = InitialResidual;
+%InitialResidual = ;
+
+% Compute Least Square Solution
+%J = [ -exp(t(1)^2 + t(1)) -t(1)^2*exp(t(1)^2 +t(1)) -t(1)*exp(t(1)^2 +t(1)); -exp(t(2)^2 + t(2)) -t(2)^2*exp(t(2)^2 +t(2)) -t(2)*exp(t(2)^2 +t(2)); -exp(t(3)^2 + t(3)) -t(3)^2*exp(t(3)^2 +t(3)) -t(3)*exp(t(3)^2 +t(3)); -exp(t(4)^2 + t(4)) -t(4)^2*exp(t(4)^2 +t(4)) -t(4)*exp(t(4)^2 +t(4)); -exp(t(5)^2 + t(5)) -t(5)^2*exp(t(5)^2 +t(5)) -t(5)*exp(t(5)^2 +t(5))];
+J1 = -exp(x(2)*t.^2 + x(3)*t);
+J2 = -exp(x(2)*t.^2+x(3)*t)*x(1).*t.^2;
+J3 = -exp(x(2)*t.^2+x(3)*t)*x(1).*t;
+J = [J1 J2 J3];
+LeastSquareSolution = -J\r;
+% Compute Normal Eqn Solution
+
+NormalEqnSoln = -(transpose(J)*J) \ (transpose(J)*r);
+% Compute QR Solution
+[Q R] = qr(J);
+QRSoln = -R\(Q'*r);   
+myShortAnswer2 = 'Compare QR factorization vs normal equations. What are potential advantages and disadvantages of both approaches? Normal equations involves expanding the residual and reduces the solution to a nxn matrix system with the cond(A)  being squared. QR has a more complex derivation but leads to the transformation of least squares equation to a more stable form than that of the normal equation. Also in the example in the notes it appears that the QR equation produces better results than the normal equation too. Conditioning for normal equation much larger than QR factorization.'; 
+
 % hand coded Guass Newton solver
 convergence = 1.0;
 tolerance = 7.e-2;                                                                                    
